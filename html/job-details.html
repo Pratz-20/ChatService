@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Job Details</title>
+    <link
+      href="https://unpkg.com/tailwindcss@^1.0/dist/tailwind.min.css"
+      rel="stylesheet"
+    />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@300;400;600;700&family=Montserrat:wght@300;400;600;700&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="job-application.css" />
+    <style>
+      body { margin-top: 20px; }
+      .popup { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background-color: rgba(0, 0, 0, 0.1); }
+      .popup-content { background-color: #fff; border-radius: 5px; padding: 20px; width: 300px; position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); }
+    </style>
+  </head>
+  <body>
+    <div id="jobContainer">
+      <div class="container mx-auto px-4">
+        <div id="cardContainer" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4"></div>
+      </div>
+      <div id="popupContainer" class="hidden fixed inset-0 flex items-center justify-center bg-gray-900 bg-opacity-50">
+        <div id="popupContent" class="bg-white border border-gray-200 rounded-lg shadow-lg p-6"></div>
+      </div>
+    </div>
+
+    <script>
+      function getJobTitleFromURL() {
+        const urlParams = new URLSearchParams(window.location.search);
+        return urlParams.get("jobTitle") || "";
+      }
+
+      function fetchJobDataFromAPI(jobTitle) {
+        fetch("http://localhost:8080/job/public/all")
+          .then(response => response.json())
+          .then(data => {
+            const filteredJobs = jobTitle
+              ? data.filter(job => job.title.toLowerCase().includes(jobTitle.toLowerCase()))
+              : data;
+            displayJobData(filteredJobs);
+          })
+          .catch(error => console.error("Error fetching job data:", error));
+      }
+
+      function displayJobData(data) {
+        const jobContainer = document.getElementById("cardContainer");
+        jobContainer.innerHTML = "";
+
+        if (data.length === 0) {
+          jobContainer.innerHTML = "<p class='text-center text-gray-600'>No jobs found.</p>";
+          return;
+        }
+
+        data.forEach((job, index) => {
+          const jobElement = document.createElement("div");
+          jobElement.className = "max-w-sm p-6 bg-white border rounded-lg shadow";
+          jobElement.innerHTML = `
+            <h5 class="text-2xl font-bold text-gray-900">${job.title}</h5>
+            <p class="text-base text-gray-700">Experience: ${job.experience} Years</p>
+            <p class="text-base text-gray-700">Salary: ${job.salary}</p>
+            <p class="text-base text-gray-700">Skills: ${job.skills.join(", ")}</p>
+            <button class="view-details bg-blue-600 text-white px-3 py-2 rounded">View Details</button>
+            <a href="job-application.html?jobId=${job.id}&jobName=${encodeURIComponent(job.title)}" class="apply bg-blue-700 text-white px-3 py-2 rounded">Apply</a>
+          `;
+          jobElement.querySelector(".view-details").addEventListener("click", () => openPopup(job));
+          jobContainer.appendChild(jobElement);
+        });
+      }
+
+      function openPopup(job) {
+        const popupContainer = document.getElementById("popupContainer");
+        const popupContent = document.getElementById("popupContent");
+        popupContent.innerHTML = `
+          <h5 class="text-2xl font-bold text-gray-900">${job.title}</h5>
+          <p class="text-gray-800">Experience: ${job.experience} Years</p>
+          <p class="text-gray-800">Salary: ${job.salary}</p>
+          <p class="text-gray-800">Skills: ${job.skills.join(", ")}</p>
+          <button onclick="closePopup()" class="mt-4 bg-red-500 text-white px-4 py-2 rounded">Close</button>
+        `;
+        popupContainer.classList.remove("hidden");
+      }
+
+      function closePopup() {
+        document.getElementById("popupContainer").classList.add("hidden");
+      }
+
+      document.addEventListener("DOMContentLoaded", () => {
+        const jobTitle = getJobTitleFromURL();
+        fetchJobDataFromAPI(jobTitle);
+      });
+    </script>
+  </body>
+</html>

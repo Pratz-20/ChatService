@@ -1,0 +1,1204 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <link href="assets/img/favicon.png" rel="icon" />
+    <link href="assets/img/apple-touch-icon.png" rel="apple-touch-icon" />
+
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400;1,600;1,700&family=Montserrat:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400;1,500;1,600;1,700&family=Raleway:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400;1,500;1,600;1,700&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="job-application.css" />
+    <link
+      href="assets/vendor/bootstrap/css/bootstrap.min.css"
+      rel="stylesheet"
+    />
+    <link
+      href="assets/vendor/bootstrap-icons/bootstrap-icons.css"
+      rel="stylesheet"
+    />
+    <link
+      href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"
+      rel="stylesheet"
+    />
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+    />
+    <script src="job-application.js"></script>
+  </head>
+  <body>
+    <div class="progress-container" id="progressContainer">
+      <div class="progress" style="height: 20px">
+        <div
+          id="progressBar"
+          class="progress-bar progress-bar-striped progress-custom progress-bar-animated"
+          role="progressbar"
+          aria-valuenow="0"
+          aria-valuemin="0"
+          aria-valuemax="100"
+        ></div>
+      </div>
+    </div>
+
+    <div class="JobApp" id="JobApp">
+      <form id="applicationForm" class="needs-validation" novalidate>
+        <div class="jobInfo form-section" id="job_Information">
+          <legend class="sections" id="jobName"></legend>
+        </div>
+
+        <!-- Personal Information -->
+        <div class="personalInfo form-section" id="Personal_Information">
+          <legend class="sections">Personal Information</legend>
+
+          <label for="firstName">Full Name</label>
+          <div class="row g-3">
+            <div class="col">
+              <input
+                type="text"
+                class="form-control"
+                id="firstName"
+                placeholder="First name"
+                aria-label="First name"
+                required
+              />
+            </div>
+            <div class="col">
+              <input
+                type="text"
+                class="form-control"
+                id="middleName"
+                placeholder="Middle name"
+                aria-label="Middle name"
+                required
+              />
+            </div>
+            <div class="col">
+              <input
+                type="text"
+                class="form-control"
+                id="lastName"
+                placeholder="Last name"
+                aria-label="Last name"
+                required
+              />
+            </div>
+          </div>
+          <br />
+
+          <div class="row g-2">
+            <div class="col-md">
+              <div class="form-floating">
+                <input
+                  type="email"
+                  class="form-control"
+                  id="email"
+                  name="email"
+                  placeholder="Email Address"
+                  aria-label="Email Address"
+                  required
+                  oninput="updateAriaLabel(this)"
+                />
+                <label for="email">Email Address</label>
+                <div class="invalid-feedback">
+                  Please enter a valid email address.
+                </div>
+              </div>
+            </div>
+            <div class="col-md">
+              <div class="form-floating">
+                <input
+                  type="text"
+                  class="form-control"
+                  id="phoneNumber"
+                  name="phoneNumber"
+                  placeholder="Phone Number"
+                  aria-label="Phone Number"
+                  minlength="10"
+                  maxlength="10"
+                  pattern="\d{10}"
+                  required
+                  oninput="updateAriaLabel(this)"
+                />
+                <label for="phoneNumber">Phone Number</label>
+                <div class="invalid-feedback">
+                  Please enter a 10-digit phone number.
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <br />
+
+          <label for="street">Current Address</label>
+          <div class="row g-3">
+            <div class="col">
+              <div class="form-floating">
+                <input
+                  type="text"
+                  class="form-control"
+                  id="street"
+                  placeholder="Street"
+                  aria-label="Street"
+                  required
+                />
+                <label for="street">Street</label>
+              </div>
+            </div>
+            <div class="col">
+              <div class="form-floating">
+                <input
+                  type="text"
+                  class="form-control"
+                  id="city"
+                  placeholder="City"
+                  aria-label="City"
+                  required
+                />
+                <label for="street">City</label>
+              </div>
+            </div>
+            <div class="col">
+              <div class="form-floating">
+                <input
+                  type="text"
+                  class="form-control"
+                  id="state"
+                  placeholder="State"
+                  aria-label="State"
+                  required
+                />
+                <label for="street">State</label>
+              </div>
+            </div>
+          </div>
+          <br />
+
+          <div class="row g-2">
+            <div class="col-sm-4">
+              <div class="form-floating">
+                <input
+                  type="text"
+                  class="form-control"
+                  id="postalCode"
+                  name="postalCode"
+                  placeholder="Postal Code"
+                  aria-label="Postal Code"
+                  minlength="6"
+                  maxlength="6"
+                  pattern="\d{6}"
+                  required
+                  oninput="updateAriaLabel(this)"
+                />
+                <label for="postalCode">Postal Code</label>
+                <div class="invalid-feedback">
+                  Please enter a valid 6-digit postal code.
+                </div>
+              </div>
+            </div>
+            <div class="col">
+              <div class="form-floating">
+                <input
+                  type="text"
+                  class="form-control"
+                  id="Country"
+                  placeholder="Country"
+                  aria-label="Country"
+                  required
+                />
+                <label for="street">Country</label>
+              </div>
+            </div>
+          </div>
+          <br />
+
+          <label for="currentLocation">Current Location</label>
+          <div class="row g-3">
+            <div class="col">
+              <div class="form-floating">
+                <input
+                  type="text"
+                  class="form-control"
+                  id="currentcity"
+                  placeholder="City"
+                  aria-label="City"
+                  required
+                />
+                <label for="street">City</label>
+              </div>
+            </div>
+            <div class="col">
+              <div class="form-floating">
+                <input
+                  type="text"
+                  class="form-control"
+                  id="currentstate"
+                  placeholder="State"
+                  aria-label="State"
+                  required
+                />
+                <label for="street">State</label>
+              </div>
+            </div>
+            <div class="col">
+              <div class="form-floating">
+                <input
+                  type="text"
+                  class="form-control"
+                  id="currentCountry"
+                  placeholder="Country"
+                  aria-label="Country"
+                  required
+                />
+                <label for="street">Country</label>
+              </div>
+            </div>
+          </div>
+          <br />
+
+          <label for="preferredLocation">Preferred Location</label>
+          <div class="row g-3">
+            <div class="col">
+              <div class="form-floating">
+                <input
+                  type="text"
+                  class="form-control"
+                  id="preferredcity"
+                  placeholder="City"
+                  aria-label="City"
+                  required
+                />
+                <label for="street">City</label>
+              </div>
+            </div>
+            <div class="col">
+              <div class="form-floating">
+                <input
+                  type="text"
+                  class="form-control"
+                  id="preferredtate"
+                  placeholder="State"
+                  aria-label="State"
+                  required
+                />
+                <label for="street">State</label>
+              </div>
+            </div>
+            <div class="col">
+              <div class="form-floating">
+                <input
+                  type="text"
+                  class="form-control"
+                  id="preferredCountry"
+                  placeholder="Country"
+                  aria-label="Country"
+                  required
+                />
+                <label for="street">Country</label>
+              </div>
+            </div>
+          </div>
+          <br /><br />
+          <div class="row g-3">
+            <div class="col-sm-4">
+              <label>Are you willing to relocate? </label>
+            </div>
+            <div class="col-sm-2" required>
+              <div class="form-check">
+                <input
+                  class="form-check-input"
+                  type="radio"
+                  name="reloacte"
+                  id="reloacte_yes"
+                  value="Yes"
+                />
+                <label class="form-check-label" for="reloacte_yes"> Yes </label>
+              </div>
+            </div>
+            <div class="col-sm-2">
+              <div class="form-check">
+                <input
+                  class="form-check-input"
+                  type="radio"
+                  name="reloacte"
+                  id="reloacte_no"
+                  value="No"
+                  required
+                />
+                <label class="form-check-label" for="reloacte_no"> No </label>
+              </div>
+            </div>
+          </div>
+          <br />
+          <div class="form-floating">
+            <input
+              type="text"
+              class="form-control"
+              id="Linkedin"
+              placeholder="Linkedin Profile"
+              aria-label="Linkedin  Profile"
+            />
+            <label for="street">Linkedin Profile</label>
+          </div>
+          <br />
+        </div>
+
+        <!-- Educational Information -->
+        <div class="educationInfo" id="Educational_Information">
+          <legend class="sections">Education</legend>
+
+          <!-- Education Row Template -->
+          <div id="educationRowTemplate" style="display: none">
+            <div class="row g-3 education-row">
+              <div class="col">
+                <select
+                  class="form-select dropdown"
+                  name="eduLevel"
+                  aria-label="Level of Education"
+                >
+                  <option value="" selected>Select from menu</option>
+                  <option value="10th">10th</option>
+                  <option value="12th">12th</option>
+                  <option value="Bachelor’s Degree">Bachelor’s</option>
+                  <option value="Master’s Degree">Master’s</option>
+                  <option value="Doctorate Degree">Doctorate</option>
+                </select>
+              </div>
+              <div class="col">
+                <input
+                  type="text"
+                  class="form-control"
+                  placeholder="Name of Institution"
+                  aria-label="Name_of_Institution"
+                />
+              </div>
+              <div class="col">
+                <input
+                  type="text"
+                  class="form-control"
+                  placeholder="Field of Study"
+                  aria-label="Field_of_Study"
+                />
+              </div>
+              <div class="col">
+                <input
+                  type="text"
+                  class="form-control"
+                  placeholder="Passing Year"
+                  aria-label="Graduation Year"
+                  minlength="4"
+                  maxlength="4"
+                  pattern="\d{4}"
+                />
+              </div>
+              <div class="col">
+                <input
+                  type="text"
+                  class="form-control"
+                  placeholder="Grade"
+                  aria-label="Grade"
+                />
+              </div>
+              <div class="col-auto">
+                <button
+                  type="button"
+                  class="btn btn-danger"
+                  onclick="removeEducationRow(this)"
+                >
+                  Remove
+                </button>
+              </div>
+            </div>
+          </div>
+
+          <!-- Education Rows -->
+          <div id="educationRows"></div>
+
+          <!-- Add Education Button -->
+          <div class="row mt-3">
+            <div class="col-auto">
+              <button
+                type="button"
+                class="btn btn-primary"
+                onclick="addEducationRow()"
+              >
+                Add Education
+              </button>
+            </div>
+          </div>
+        </div>
+
+        <!-- Work Experience -->
+
+        <div class="Work_Experience WorkExperience" id="Work_Experience">
+          <legend class="sections">Work Experience</legend>
+          <div class="d-flex flex-row justify-content-start mb-3">
+            <label for="total_experience"
+              >Total Software Domain Experience (Years)</label
+            >
+            <div class="d-flex flex-row mx-4">
+              <input
+                type="number"
+                class="form-control"
+                id="total_experience"
+                aria-label="Total Software Domain Experience (Years)"
+                required
+              />
+            </div>
+          </div>
+
+          <div id="workExperienceEntries">
+            <!-- Work Experience Entry Template -->
+            <div
+              class="work-experience-entry"
+              style="display: none; padding-bottom: 15px"
+            >
+              <div class="row g-2">
+                <div class="col">
+                  <label for="company-name">Company Name:</label>
+                  <input
+                    type="text"
+                    class="form-control"
+                    aria-label="Company Name"
+                    id="company-name"
+                  />
+                </div>
+                <div class="col">
+                  <label for="job-title">Job Title:</label>
+                  <input
+                    type="text"
+                    class="form-control"
+                    aria-label="Job Title"
+                    id="job-title"
+                  />
+                </div>
+                <div class="col">
+                  <label for="responsibility">Responsibility:</label>
+                  <input
+                    type="text"
+                    class="form-control"
+                    aria-label="Responsibility"
+                    id="responsibility"
+                  />
+                </div>
+              </div>
+              <div class="row g-2" style="margin-top: 15px">
+                <div class="col">
+                  <label for="start-date">Start Date:</label>
+                  <input
+                    type="date"
+                    class="form-control"
+                    aria-label="Start Date"
+                    id="start-date"
+                  />
+                </div>
+                <div class="col">
+                  <label for="end-date">End Date:</label>
+                  <input
+                    type="date"
+                    class="form-control"
+                    aria-label="End Date"
+                    id="end-date"
+                  />
+                </div>
+                <div class="col">
+                  <label for="reason-for-leaving">Reason for Leaving:</label>
+                  <input
+                    type="text"
+                    class="form-control"
+                    aria-label="Reason for Leaving"
+                    id="reason-for-leaving"
+                  />
+                </div>
+              </div>
+              <div class="row" style="margin-top: 15px">
+                <div class="col">
+                  <button
+                    type="button"
+                    class="btn btn-danger"
+                    onclick="removeWorkExperienceEntry(this)"
+                  >
+                    Remove
+                  </button>
+                </div>
+              </div>
+            </div>
+          </div>
+          <br />
+          <!-- Add Work Experience Button -->
+          <button
+            type="button"
+            class="btn btn-primary"
+            onclick="addWorkExperienceEntry()"
+          >
+            Add Work Experience
+          </button>
+        </div>
+
+<!-- Compensation and Notice Period  -->
+
+          <div class="Compensation_Notice" id="Compensation_and_Notice">
+            <legend class="sections">Compensation and Notice Period</legend>
+            <div class="row g-4">
+                <div class="col">
+                    <label for="CurrentSalary">Current Salary per Annum (in [Currency])</label>
+                </div>
+                <div class="col">
+                    <input id="CurrentSalary" type="text" class="form-control" aria-label="Current Salary" required />
+                </div>
+                <div class="col">
+                    <label for="ExpectedSalary">Expected Salary per Annum (in [Currency])</label>
+                </div>
+                <div class="col">
+                    <input id="ExpectedSalary" type="text" class="form-control" aria-label="Expected Salary" required />
+                </div>
+            </div>
+            <br />
+            <div class="row g-4">
+                <div class="col">
+                    <label for="noticePeriod">Notice Period (in days)</label>
+                </div>
+                <div class="col">
+                    <input id="noticePeriod" type="text" class="form-control" aria-label="Notice Period" required />
+                </div>
+                <div class="col">
+                    <label for="lastDay">Last working Day (If Already on Notice Period)</label>
+                </div>
+                <div class="col">
+                    <input id="lastDay" type="date" class="form-control" aria-label="Last working Day" />
+                </div>
+            </div>
+            <br />
+            <div class="row g-3">
+                <div class="col-sm-3">
+                    <label>Have you resigned? </label>
+                </div>
+                <div class="col-sm-2">
+                    <div class="form-check">
+                        <input class="form-check-input" type="radio" name="resigned" id="resigned_yes" value="Yes" required />
+                        <label class="form-check-label" for="resigned_yes">Yes</label>
+                    </div>
+                </div>
+                <div class="col-sm-1">
+                    <div class="form-check">
+                        <input class="form-check-input" type="radio" name="resigned" id="resigned_no" value="No" required />
+                        <label class="form-check-label" for="resigned_no">No</label>
+                    </div>
+                </div>
+            </div>
+            <br />
+            <div class="row g-3">
+                <div class="col-sm-3">
+                    <label>Is notice period negotiable? </label>
+                </div>
+                <div class="col-sm-2">
+                    <div class="form-check">
+                        <input class="form-check-input" type="radio" name="negotiable" id="negotiable_yes" value="Yes" required />
+                        <label class="form-check-label" for="negotiable_yes">Yes</label>
+                    </div>
+                </div>
+                <div class="col-sm-1">
+                    <div class="form-check">
+                        <input class="form-check-input" type="radio" name="negotiable" id="negotiable_no" value="No" required />
+                        <label class="form-check-label" for="negotiable_no">No</label>
+                    </div>
+                </div>
+            </div>
+            <br />
+            <div class="row">
+              <div class="col-sm-3">
+                  <label for="preferredJoiningDate">Preferred Joining Date</label>
+              </div>
+              <div class="col-sm-3">
+                  <input type="date" class="form-control" id="preferredJoiningDate" aria-label="Preferred Joining Date" required />
+              </div>
+          </div>
+        </div>
+
+        <!--  Technical Skills  -->
+        <div class="tech_skills" id="Technical_Skills">
+          <legend class="sections">Technical Skills</legend>
+          <br />
+          <label>
+            Please rate your proficiency in the following programming languages
+            (1 — Beginner, 3- Intermediate,5 — Expert)</label
+          >
+          <br />
+          <br />
+          <div class="row g-5">
+            <div class="col">
+              <label for="c++" class="form-label">C++</label>
+              <select
+                class="form-select dropdown"
+                id="c++"
+                aria-label="c++ rate"
+              >
+                <option value="" selected></option>
+                <option value="1">1</option>
+                <option value="2">3</option>
+                <option value="3">5</option>
+              </select>
+              <div class="invalid-feedback">Please give Rating.</div>
+            </div>
+            <div class="col">
+              <label for="java" class="form-label">Java</label>
+              <select
+                id="java"
+                class="form-select dropdown"
+                aria-label="java rate"
+              >
+                <option value="" selected></option>
+                <option value="1">1</option>
+                <option value="2">3</option>
+                <option value="3">5</option>
+              </select>
+            </div>
+            <div class="col">
+              <label for="python" class="form-label">Python</label>
+              <select
+                id="python"
+                class="form-select dropdown"
+                aria-label="python rate"
+              >
+                <option value="" selected></option>
+                <option value="1">1</option>
+                <option value="2">3</option>
+                <option value="3">5</option>
+              </select>
+            </div>
+            <div class="col">
+              <label for="js" class="form-label">JavaScript</label>
+              <select id="js" class="form-select dropdown" aria-label="js rate">
+                <option value="" selected></option>
+                <option value="1">1</option>
+                <option value="2">3</option>
+                <option value="3">5</option>
+              </select>
+            </div>
+            <div class="col">
+              <label for="c#" class="form-label">C#</label>
+              <select id="c#" class="form-select dropdown" aria-label="c# rate">
+                <option value="" selected></option>
+                <option value="1">1</option>
+                <option value="2">3</option>
+                <option value="3">5</option>
+              </select>
+            </div>
+          </div>
+          <br />
+
+          <div class="row g-4">
+            <div class="col">
+              <label for="ruby" class="form-label">Ruby</label>
+              <select
+                id="ruby"
+                class="form-select dropdown"
+                aria-label="ruby rate"
+              >
+                <option value="" selected></option>
+                <option value="1">1</option>
+                <option value="2">3</option>
+                <option value="3">5</option>
+              </select>
+            </div>
+
+            <div class="col-sm-3">
+              <label>Others (please specify)</label>
+            </div>
+            <div class="col-sm-3">
+              <input type="text" class="form-control" aria-label="Others" />
+            </div>
+            <div class="col-sm-2">
+              <select id="inputState" class="form-select">
+                <option selected></option>
+                <option>1</option>
+                <option>3</option>
+                <option>5</option>
+              </select>
+            </div>
+          </div>
+
+          <br />
+
+          <div class="row g-2">
+            <div class="col">
+              <label for="frameworks">
+                Which frameworks and libraries are you familiar with? (e.g.,
+                Angular, React, Django, Rails)</label
+              >
+            </div>
+            <div class="col">
+              <textarea
+                class="form-control"
+                id="frameworks"
+                name="frameworks"
+                style="height: 30px"
+              ></textarea>
+            </div>
+          </div>
+
+          <div class="row g-2">
+            <div class="col">
+              <label for="Version_Control">
+                Are you experienced with any version control systems (e.g., Git,
+                SVN)?</label
+              >
+            </div>
+            <div class="col">
+              <textarea
+                class="form-control"
+                id="Version_Control"
+                name="Version_Control"
+                style="height: 30px"
+              ></textarea>
+            </div>
+          </div>
+          <br />
+          <div class="row g-2">
+            <div class="col">
+              <label for="Agile_meth">
+                Are you familiar with Agile methodologies (e.g., Scrum,
+                Kanban)?</label
+              >
+            </div>
+            <div class="col">
+              <textarea
+                class="form-control"
+                id="Agile_meth"
+                name="Agile_meth"
+                style="height: 30px"
+              ></textarea>
+            </div>
+          </div>
+        </div>
+
+        <!-- Portfolio and Projects -->
+        <div class="Portfolio_Projects" id="Portfolio_and_Projects">
+          <legend class="sections">Portfolio and Projects</legend>
+
+          <div id="projectEntries">
+            <!-- Project Entry Template -->
+            <div
+              class="project-entry row g-2"
+              style="display: none; padding-bottom: 5px"
+            >
+              <div class="col">
+                <!-- <label for="ProjectName">Project Name</label> -->
+                <input
+                  type="text"
+                  class="form-control"
+                  placeholder="Project Name"
+                  id="ProjectName"
+                  aria-label="Project Name"
+                />
+              </div>
+              <div class="col">
+                <!-- <label for="GitHubLink">GitHub Link</label> -->
+                <input
+                  type="text"
+                  class="form-control"
+                  placeholder="GitHub Link"
+                  id="GitHubLink"
+                  aria-label="GitHub Link"
+                />
+              </div>
+              <div class="col">
+                <!-- <label for="ProjectDescription">Project Description</label> -->
+                <textarea
+                  class="form-control"
+                  placeholder="Project Description"
+                  id="ProjectDescription"
+                  style="height: 80px"
+                  
+              ></textarea>
+          </div>
+          
+          
+          <div class="col-auto align-self-end mb-3">
+              <button type="button" class="btn btn-danger" onclick="removeProjectEntry(this)">Remove</button>
+          </div>
+          </div>
+      
+  </div>
+  <br>
+  <!-- Add Project Button -->
+  <button type="button" class="btn btn-primary" onclick="addProjectEntry()">Add Project</button>
+</div>
+
+ <!-- Additional Information -->
+          <div class="Additionnal_info" id="Additional_Information">
+            <legend class="sections">Additional Information</legend>
+            <div class="row g-2">
+              <div class="col-sm-7">
+                <label for="work_environment"
+                  >What is your preferred work environment ?</label
+                >
+              </div>
+              
+              <div class="col">
+                <select
+                  class="form-select dropdown"
+                  name="work_environment"
+                  
+                  aria-label="work_environment"
+                  required
+                >
+                  <option value="" selected>Select from menu</option>
+                  <option value="Remote">Remote</option>
+                  <option value="Hybrid">Hybrid</option>
+                  <option value="In-office">In-office</option>
+                </select>
+              </div>
+            </div>
+            <br />
+            <div class="row g-3">
+              <div class="col">
+                <label>Are you legally eligible to work in [Country]?</label>
+              </div>
+              <div class="col-sm-2">
+                <div class="form-check">
+                  <input
+                    class="form-check-input"
+                    type="radio"
+                    name="legally_eligible"
+                    id="legally_eligible_yes"
+                    value="Yes"
+                  />
+                  <label class="form-check-label" for="legally_eligible_yes">
+                    Yes
+                  </label>
+                </div>
+              </div>
+              <div class="col-sm-2">
+                <div class="form-check">
+                  <input
+                    class="form-check-input"
+                    type="radio"
+                    name="legally_eligible"
+                    id="legally_eligible_no"
+                    value="No"
+                    required
+                  />
+                  <label class="form-check-label" for="legally_eligible_no">
+                    No
+                  </label>
+                </div>
+              </div>
+            </div>
+            <br />
+            <div class="row g-2">
+              <div class="col-sm-6">
+                <label for="VideoLink"
+                  >Submit Video Introduction Link (Optional)
+                </label>
+              </div>
+              <div class="col">
+                <input
+                  type="text"
+                  class="form-control"
+                  id="VideoLink"
+                  aria-label="VideoLink"
+                />
+              </div>
+            </div>
+            <br />
+            
+          </div>
+
+        <!-- Attachments -->
+        <div class="resume" id="Attachments">
+          <legend class="sections">Attachments</legend>
+          <div class="row g-2">
+            <div class="col-4">
+              <label for="formFile" class="form-label"
+                >Please upload your resume in PDF format.</label
+              >
+            </div>
+            <div class="col">
+              <input class="form-control" type="file" id="formFile" />
+            </div>
+          </div>
+          <br />
+          <br />
+
+          <div class="row justify-content-center">
+            <div class="col-auto">
+              <button type="button" class="btn custom-btn" onclick="submitFormAndRedirect()">Submit</button>
+
+
+            </div>
+          </div>
+        </div>
+      </form>
+    </div>
+
+    <script>
+      window.onload = function () {
+        // Function to show job application form and apply other changes
+        function openJobApp() {
+          let JobApp = document.getElementById("JobApp");
+          if (JobApp) {
+            JobApp.classList.add("open-JobApp");
+          } else {
+            console.error("Element with ID 'JobApp' not found.");
+          }
+          let applyButton = document.getElementById("applyButton");
+          if (applyButton) {
+            applyButton.style.display = "none";
+          } else {
+            console.error("Element with ID 'applyButton' not found.");
+          }
+          let jobContainer = document.getElementById("jobContainer");
+          if (jobContainer) {
+            jobContainer.classList.add("hide-bg");
+          } else {
+            console.error("Element with ID 'jobContainer' not found.");
+          }
+          let progressContainer = document.getElementById("progressContainer");
+          if (progressContainer) {
+            progressContainer.style.display = "block";
+          } else {
+            console.error("Element with ID 'progressContainer' not found.");
+          }
+        }
+        openJobApp();
+
+        // Function to update aria-label
+        function updateAriaLabel(input) {
+          var value = input.value;
+          input.setAttribute("aria-label", value);
+        }
+      };
+
+      (function () {
+        "use strict";
+        window.addEventListener(
+          "load",
+          function () {
+            var forms = document.getElementsByClassName("needs-validation");
+            var validation = Array.prototype.filter.call(
+              forms,
+              function (form) {
+                form.addEventListener(
+                  "submit",
+                  function (event) {
+                    if (form.checkValidity() === false) {
+                      event.preventDefault();
+                      event.stopPropagation();
+                    }
+                    form.classList.add("was-validated");
+                  },
+                  false
+                );
+              }
+            );
+          },
+          false
+        );
+      });
+    </script>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
+
+    <script>
+      // Function to get URL parameters
+      function getUrlParams() {
+        const searchParams = new URLSearchParams(window.location.search);
+        const params = {};
+        for (const [key, value] of searchParams) {
+          params[key] = value;
+        }
+        return params;
+      }
+
+      // Get job name and ID from URL parameters
+      const params = getUrlParams();
+      const jobId = params.jobId;
+      const jobName = decodeURIComponent(params.jobName);
+
+      // Update job name and ID in the form
+      document.getElementById("jobName").textContent = jobName;
+      document.getElementById("jobId").textContent = jobId;
+
+      $(document).ready(function () {
+        $(
+          "#applicationForm input, #applicationForm select, #applicationForm textarea"
+        ).on("input change", function () {
+          var progress = calculateProgress();
+          $("#progressBar")
+            .css("width", progress + "%")
+            .attr("aria-valuenow", progress);
+          $(".progress-text").text(progress + "%");
+        });
+
+        function calculateProgress() {
+          var totalFields = $(
+            "#applicationForm input[required], #applicationForm select[required], #applicationForm textarea[required]"
+          ).length;
+          var completedFields = $(
+            "#applicationForm input[required], #applicationForm select[required], #applicationForm textarea[required]"
+          ).filter(function () {
+            var fieldType = $(this).attr("type");
+            if (fieldType === "radio" || fieldType === "checkbox") {
+              return (
+                $(
+                  "#applicationForm input[name='" +
+                    $(this).attr("name") +
+                    "']:checked"
+                ).length > 0
+              );  
+            } else {
+              return $(this).val().trim() !== "";
+            }
+          }).length;
+          var progress = Math.round((completedFields / totalFields) * 100);
+          return progress;
+        }
+
+        $("#applicationForm").click(function () {
+          $(".progress-container").slideDown();
+        });
+
+        $("#applicationForm").submit(function (event) {
+          event.preventDefault();
+          alert("Form submitted!");
+        });
+      });
+    </script>
+
+    <!-- Post API code -->
+
+  <script>
+    function submitForm() {
+      console.log("Submitting form...");
+      console.log("Submitting form...");
+    var form = document.getElementById('applicationForm');
+    if (form.checkValidity() === false) {
+        console.log("Form validation failed. Please fill in all required fields.");
+        form.classList.add('was-validated');
+        return;
+    }
+    // Get job ID from URL parameters
+      const params = getUrlParams();
+      const jobId = params.jobId;
+
+//       console.log("Extracted jobId from URL:", jobId); // Debugging log
+
+// if (!jobId) {
+//     console.error("❌ jobId is undefined or missing! Check URL parameters.");
+// }
+
+      // Now you can use jobId in your form
+      const appliedJobId = jobId;
+      //PersonalInformation
+      // Collect form data
+      const firstName = document.getElementById('firstName').value;
+      const middleName = document.getElementById('middleName').value;
+      const lastName = document.getElementById('lastName').value;
+      const email = document.getElementById('email').value;
+      const phoneNumber = document.getElementById('phoneNumber').value;
+      const experience=document.getElementById('total_experience').value;
+      // Current Address
+      const street = document.getElementById('street').value;
+      const city = document.getElementById('city').value;
+      const state = document.getElementById('state').value;
+      const postalCode=document.getElementById('postalCode').value;
+      const Country=document.getElementById('Country').value;
+      //current Location
+      const city1 = document.getElementById('currentcity').value;
+      const state1 = document.getElementById('currentstate').value;
+      const Country1=document.getElementById('currentCountry').value;
+      //Preferred Location
+      const city2 = document.getElementById('preferredcity').value;
+      const state2 = document.getElementById('preferredtate').value;     
+      const Country2=document.getElementById('preferredCountry').value;
+
+      const willingToRelocate = document.getElementById('reloacte_yes').checked;
+      const linkedinProfile=document.getElementById('Linkedin').value;
+      const technicalSkills = getTechnicalSkillsInfo();
+
+  
+
+
+      // additionalInformation
+      // const preferredWorkEnvironment=document.getElementById('work_environment').value;
+      const preferredWorkEnvironment = document.querySelector('[name="work_environment"]').value;
+      const eligibilityToWork=document.getElementById('legally_eligible_yes').checked;
+      const videoIntroductionLink=document.getElementById('VideoLink').value;
+  
+      // Construct the data object to send
+      const formData = {
+        "personalInformation": {
+          appliedJobId,
+          firstName,
+          middleName,
+          lastName,
+          email,
+          phoneNumber,
+          "currentAddress": `${street}, ${city}, ${state}, ${postalCode}, ${Country}`,
+          "currentLocation": `${city1}, ${state1}, ${Country1}`,
+          "preferredLocation": `${city2}, ${state2}, ${Country2}`,
+          willingToRelocate,
+          linkedinProfile,
+          experience: parseInt(experience)
+      },  
+      "education":getEducationInfo(),
+      "workExperience":getWorkExperienceInfo(),
+      "technicalSkills": technicalSkills,
+      "compensationAndNoticePeriod": getCompensationAndNoticePeriod(),
+      "portfolioAndProjects": getProjectInfo(),
+  "additionalInformation": {
+        preferredWorkEnvironment,
+        eligibilityToWork,
+        videoIntroductionLink
+  }
+    
+  };
+  // Log the constructed formData object
+  console.log("Form Data:", formData);
+  
+      // Send the data to the backend
+      return sendData(formData);
+    }
+  
+    function sendData(formData) {
+  console.log("Sending data to the backend...");
+
+  console.log("JSON Payload:", JSON.stringify(formData, null, 2));
+
+
+  // Return the fetch promise
+  return fetch('http://localhost:8080/applicant/create', {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json'
+    },
+    body: JSON.stringify(formData)
+  })
+  .then(response => {
+    if (!response.ok) {
+      throw new Error('Network response was not ok');
+    }
+    return response.json();
+  })
+  .then(data => {
+    // Handle success response from the backend
+    console.log('Data sent successfully:', data);
+    return data; // Return the data
+  })
+  .catch(error => {
+    // Handle error
+    console.error('Error sending data:', error);
+  });
+}
+    
+  </script>
+  </body>
+</html>
