@@ -1,0 +1,69 @@
+
+.JobApp {
+  width: 90%;
+  max-width: auto; 
+  margin: 0 auto;
+  background-color: rgba(255, 255, 255, 0.8);
+  padding: 20px; 
+  border-radius: 10px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);  
+
+}
+.educationInfo,
+.WorkExperience,
+.personalInfo,
+.Compensation_Notice,
+.tech_skills,
+.Portfolio_Projects,
+.Additionnal_info,
+.resume,.jobInfo{
+  background-color: rgba(231, 230, 230, 0.6);
+  border-radius: 8px;
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+  margin-top: 20px;
+  padding-bottom:20px;
+  padding: 40px;
+}
+button.custom-btn {
+  background-color: #1c88ba;
+  color: #fff;
+  border-color: #ffffff;
+}
+button.custom-btn:hover,
+button.custom-btn:active {
+  background-color: #1c88ba;
+  border-color: #1c88ba;
+}
+.sections {
+  color: #1c88ba;
+  font-weight: bold;
+}
+.hide-bg {
+  background-image: none;
+}
+.progress-bar {
+  background-color: #007bff;
+}
+.progress-bar.progress-custom {
+  background-color: #1c88ba;
+}
+.progress-container {
+  position: fixed; 
+  top: 0;
+  left: 0;
+  width: 90%;
+  margin-top: 10px;
+  margin-left: 62px;
+  z-index: 1000;
+  align-items: center;
+  display: none;
+}
+.education-row {
+  padding-bottom: 10px; /* Adjust as needed */
+}
+/* styles.css */
+
+.work-experience-container .row {
+  padding-bottom: 10px;
+}
+
