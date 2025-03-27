@@ -15,7 +15,7 @@ const ChatWindow = ({ onClose }: { onClose: () => void }) => {
     { text: "Hello! How can I assist you today?", sender: "bot", timestamp: new Date() }
   ]);
   const [stompClient, setStompClient] = useState<Client | null>(null);
-  const [iframeUrl, setIframeUrl] = useState<string | null>(null); // Store the iframe URL
+  const [iframeUrl, setIframeUrl] = useState<string | null>(null);
 
   useEffect(() => {
     const socket = new SockJS("http://localhost:8080/ws");
@@ -28,25 +28,35 @@ const ChatWindow = ({ onClose }: { onClose: () => void }) => {
     client.onConnect = () => {
       console.log("✅ WebSocket Connected");
 
-      // Subscribe to receive messages from backend
       client.subscribe("/topic/messages", (msg) => {
         console.log("📩 Received:", msg.body);
-
+      
         const messageText = msg.body.trim();
         setMessages((prev) => [...prev, { text: messageText, sender: "bot", timestamp: new Date() }]);
-
-        // Check if message is a URL
+      
         if (messageText.startsWith("http://") || messageText.startsWith("https://")) {
-          setIframeUrl(messageText);
+          try {
+            const url = new URL(messageText);
+            if (url.hostname.includes("connecticus.in")) {
+              // Open in a new tab ONLY for connecticus.in
+              window.open(messageText, "_blank");
+            } else {
+              // Embed all other links in the iframe
+              setIframeUrl(messageText);
+            }
+          } catch (error) {
+            console.error("Invalid URL:", messageText);
+          }
         }
       });
+      
 
       setStompClient(client);
     };
 
     client.activate();
 
-    return () => {      
+    return () => {
       client.deactivate();
       console.log("❌ WebSocket Disconnected");
     };
@@ -56,10 +66,7 @@ const ChatWindow = ({ onClose }: { onClose: () => void }) => {
     if (message.trim() && stompClient && stompClient.connected) {
       const userMessage: Message = { text: message, sender: "user", timestamp: new Date() };
       setMessages((prev) => [...prev, userMessage]);
-
-      // ✅ Send user message directly to WebSocket
       stompClient.publish({ destination: "/app/process-message", body: message });
-
       setMessage("");
     } else {
       console.error("❌ Unable to send message: WebSocket not connected.");
@@ -81,14 +88,23 @@ const ChatWindow = ({ onClose }: { onClose: () => void }) => {
 
       <div className="flex-1 overflow-y-auto p-4 bg-gray-50">
         {iframeUrl ? (
-          // 🎯 Wide iframe with reduced height to fit screen
-          <iframe
-            src={iframeUrl}
-            className="w-full h-full rounded-lg border border-gray-300"
-            title="Chat Response"
-          ></iframe>
+          <div className="flex flex-col h-full">
+            <div className="flex justify-between bg-gray-100 p-2">
+              <h2 className="text-lg font-semibold">Job Details</h2>
+              <button
+                onClick={() => setIframeUrl(null)}
+                className="px-3 py-1 bg-red-600 text-white rounded-md hover:bg-red-700 transition"
+              >
+                Close
+              </button>
+            </div>
+            <iframe
+              src={iframeUrl}
+              className="w-full flex-1 border border-gray-300 rounded-lg"
+              title="Job Details"
+            ></iframe>
+          </div>
         ) : (
-          // 🎯 Normal chat messages
           messages.map((msg, index) => (
             <div key={index} className={`flex mb-4 ${msg.sender === "user" ? "justify-end" : "justify-start"}`}>
               <div

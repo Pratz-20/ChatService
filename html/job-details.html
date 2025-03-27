@@ -4,16 +4,7 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Job Details</title>
-    <link
-      href="https://unpkg.com/tailwindcss@^1.0/dist/tailwind.min.css"
-      rel="stylesheet"
-    />
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link
-      href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@300;400;600;700&family=Montserrat:wght@300;400;600;700&display=swap"
-      rel="stylesheet"
-    />
+    <link href="https://unpkg.com/tailwindcss@^1.0/dist/tailwind.min.css" rel="stylesheet" />
     <link rel="stylesheet" href="job-application.css" />
     <style>
       body { margin-top: 20px; }
@@ -24,6 +15,7 @@
   <body>
     <div id="jobContainer">
       <div class="container mx-auto px-4">
+        <h2 id="pageTitle" class="text-center text-2xl font-bold mb-4"></h2>
         <div id="cardContainer" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4"></div>
       </div>
       <div id="popupContainer" class="hidden fixed inset-0 flex items-center justify-center bg-gray-900 bg-opacity-50">
@@ -34,31 +26,43 @@
     <script>
       function getJobTitleFromURL() {
         const urlParams = new URLSearchParams(window.location.search);
-        return urlParams.get("jobTitle") || "";
+        return urlParams.get("title") || ""; // Use 'title' to match the backend query parameter
       }
 
       function fetchJobDataFromAPI(jobTitle) {
-        fetch("http://localhost:8080/job/public/all")
+        fetch("http://localhost:8080/job/public/all") // Fetch all jobs
           .then(response => response.json())
           .then(data => {
-            const filteredJobs = jobTitle
-              ? data.filter(job => job.title.toLowerCase().includes(jobTitle.toLowerCase()))
-              : data;
-            displayJobData(filteredJobs);
+            let filteredJobs = data;
+            
+            if (jobTitle) {
+              filteredJobs = data.filter(job => 
+                job.title.toLowerCase().includes(jobTitle.replace("-", " ").toLowerCase())
+              );
+            }
+
+            displayJobData(filteredJobs, jobTitle);
           })
           .catch(error => console.error("Error fetching job data:", error));
       }
 
-      function displayJobData(data) {
+      function displayJobData(data, jobTitle) {
         const jobContainer = document.getElementById("cardContainer");
+        const pageTitle = document.getElementById("pageTitle");
         jobContainer.innerHTML = "";
+
+        if (jobTitle) {
+          pageTitle.innerText = `Available Jobs for: ${jobTitle.replace("-", " ")}`;
+        } else {
+          pageTitle.innerText = "All Available Jobs";
+        }
 
         if (data.length === 0) {
           jobContainer.innerHTML = "<p class='text-center text-gray-600'>No jobs found.</p>";
           return;
         }
 
-        data.forEach((job, index) => {
+        data.forEach(job => {
           const jobElement = document.createElement("div");
           jobElement.className = "max-w-sm p-6 bg-white border rounded-lg shadow";
           jobElement.innerHTML = `
